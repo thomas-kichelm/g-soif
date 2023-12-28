@@ -1,0 +1,61 @@
+/* styles.css */
+
+/* Styles pour rendre la carte responsive */
+/* Utilisation de media queries pour différentes tailles d'écrans */
+/* Vous pouvez ajuster les valeurs pour correspondre à vos besoins */
+
+/* Pour une largeur d'écran jusqu'à 768px */
+@media screen and (max-width: 768px) {
+    .map-container {
+      width: 100%;
+      height: 300px;
+    }
+  }
+  
+  /* Pour une largeur d'écran supérieure à 768px */
+  @media screen and (min-width: 769px) {
+    .map-container {
+      width: 100%;
+      height: 500px;
+    }
+  }
+  
+  /* Style pour rendre les marqueurs plus attrayants */
+  .my-marker {
+    background-color: #ff6b6b;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style pour les popups */
+  .leaflet-popup-content-wrapper {
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Style pour le contenu à l'intérieur des popups */
+  .leaflet-popup-content {
+    margin: 8px;
+  }
+  
+  /* Style pour le titre à l'intérieur des popups */
+  .leaflet-popup-content h2 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  /* Style pour le texte à l'intérieur des popups */
+  .leaflet-popup-content p {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
