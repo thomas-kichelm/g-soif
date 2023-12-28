@@ -1,11 +1,8 @@
-// WaterPointsMap.js
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import './styles.css';
-
 import L from 'leaflet';
 import iconUrl from '../icon.png';
 
@@ -15,6 +12,19 @@ const customIcon = L.icon({
   iconAnchor: [16, 32],
   popupAnchor: [0, -32],
 });
+
+const openGPSApp = (latitude, longitude) => {
+  const link = `geo:${latitude},${longitude}`;
+
+  const isSupported = (typeof navigator !== 'undefined' && typeof navigator.geolocation !== 'undefined');
+
+  if (isSupported) {
+    window.location.href = link;
+  } else {
+    console.error('Device does not support geo URI.');
+    // Autre logique de secours si la fonctionnalité n'est pas supportée
+  }
+};
 
 const WaterPointsMap = () => {
   const [waterPoints, setWaterPoints] = useState([]);
@@ -55,8 +65,7 @@ const WaterPointsMap = () => {
                 <p>
                   <a
                     href={`geo:${point.geo.latitude},${point.geo.longitude}?q=${point.geo.latitude},${point.geo.longitude}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    onClick={() => openGPSApp(point.geo.latitude, point.geo.longitude)}
                   >
                     Ouvrir l'application GPS pour obtenir l'itinéraire
                   </a>
