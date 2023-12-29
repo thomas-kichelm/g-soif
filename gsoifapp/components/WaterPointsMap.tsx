@@ -21,7 +21,7 @@ const WaterPointsMap = () => {
   const fetchWaterPoints = async () => {
     try {
       const response = await fetch(
-        `https://owater.gogocarto.fr/api/elements?categories=&bounds=${currentRegion.longitude - currentRegion.longitudeDelta}%2C${currentRegion.latitude - currentRegion.latitudeDelta}%2C${currentRegion.longitude + currentRegion.longitudeDelta}%2C${currentRegion.latitude + currentRegion.latitudeDelta}`
+        `https://owater.gogocarto.fr/api/elements?limit=100&categories=&bounds=${currentRegion.longitude - currentRegion.longitudeDelta}%2C${currentRegion.latitude - currentRegion.latitudeDelta}%2C${currentRegion.longitude + currentRegion.longitudeDelta}%2C${currentRegion.latitude + currentRegion.latitudeDelta}`
       );
       const data = await response.json();
       setWaterPoints(data.data || []);
@@ -63,6 +63,7 @@ const WaterPointsMap = () => {
   return (
     <View style={{ flex: 1 }}>
       <MapView
+      minZoomLevel={7}
         ref={mapRef}
         style={{ flex: 1 }}
         initialRegion={currentRegion}
