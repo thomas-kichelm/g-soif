@@ -1,18 +1,20 @@
+// Nav.js
 import React from 'react';
-import { DarkModeProvider } from './DarkModeContext';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from './screens/HomeScreen';
-import SettingsScreen from './screens/SettingsScreen';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHome, faCog } from '@fortawesome/free-solid-svg-icons';
+import { useDarkMode } from '../DarkModeContext';
+import HomeScreen from '../screens/HomeScreen';
+import SettingsScreen from '../screens/SettingsScreen';
+import { NavigationContainer } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
-const App = () => {
+const Nav = () => {
+  const { isEnabled } = useDarkMode();
+
   return (
-    <DarkModeProvider>
-<NavigationContainer>
+    <NavigationContainer>
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ color, size }) => {
@@ -25,13 +27,19 @@ const App = () => {
             return icon;
           },
         })}
+        tabBarOptions={{
+          style: {
+            backgroundColor: isEnabled ? '#3e3e3e' : 'white',
+            borderTopColor: isEnabled ? 'black' : 'white',
+          },
+          activeTintColor: isEnabled ? 'white' : 'black',
+        }}
       >
         <Tab.Screen name="Accueil" component={HomeScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
     </NavigationContainer>
-    </DarkModeProvider>
   );
 };
 
-export default App;
+export default Nav;
